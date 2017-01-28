@@ -7,7 +7,9 @@ A: We used the observation that when two different boxes has only two choices
    and those choices are similar then each one will get a digit and we propagate
    this to all other boxes in the same unit by removing the two digits for their
    set of possible values thus reducing the number of choices we will try in search
-   and improving the efficiency
+   and improving the efficiency.
+   This can be implemented by looking for naked twins in each unit and remove their 
+   digits from their peers
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  

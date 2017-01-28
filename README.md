@@ -3,11 +3,18 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+A: We used the observation that when two different boxes has only two choices
+   and those choices are similar then each one will get a digit and we propagate
+   this to all other boxes in the same unit by removing the two digits for their
+   set of possible values thus reducing the number of choices we will try in search
+   and improving the efficiency
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+A: we use constraint propagation to eliminate the choices that's implausible for each box that 
+   we have to figure out its value and when we do search we propagate those constraints to their peers
+   thus reducing their plausible  answers too. So basically we use it to reduce the amount of search in 
+   the search space of Sudoku by eliminating as much states as we can while we are doing the search.
 
 ### Install
 

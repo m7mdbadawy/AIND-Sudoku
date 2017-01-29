@@ -45,6 +45,7 @@ def naked_twins(values):
         for p1 in unit:
             for p2 in unit:
                 if p1 != p2 and values[p1] == values[p2] and len(values[p1]) == 2:
+                    #for all boxes in their unit remove the digits
                     for p3 in unit:
                         if p3 != p1 and p3 != p2 :
                             assign_value(values,p3,values[p3].replace(values[p2][0],''))
@@ -128,6 +129,11 @@ def reduce_puzzle(values):
     return values
 
 def search(values):
+    """
+     uses dfs to find a solution for a sudoku puzzle
+     Input: A sudoku in dictionary form.
+     Output: The resulting sudoku in dictionary form.
+    """
     values = reduce_puzzle(values)
     if values == False:
         return False
@@ -154,6 +160,7 @@ def solve(grid):
     Returns:
         The dictionary representation of the final sudoku grid. False if no solution exists.
     """
+    #this simply uses search() to find the ans
     values = grid_values(grid)
     return search(values)
     

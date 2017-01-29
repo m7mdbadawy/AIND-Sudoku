@@ -88,6 +88,16 @@ def display(values):
     print
 
 def eliminate(values):
+    """Eliminate values from peers of each box with a single value.
+
+    Go through all the boxes, and whenever there is a box with a single value,
+    eliminate this value from the set of values of all its peers.
+
+    Args:
+        values: Sudoku in dictionary form.
+    Returns:
+        Resulting Sudoku in dictionary form after eliminating values.
+    """
     solved_values = [box for box in values.keys() if len(values[box]) == 1]
     for box in solved_values:
         digit = values[box]
@@ -122,6 +132,7 @@ def reduce_puzzle(values):
         solved_values_before = len([box for box in values.keys() if len(values[box]) == 1])
         values = eliminate(values)
         values = only_choice(values)
+        values = naked_twins(values)
         solved_values_after = len([box for box in values.keys() if len(values[box]) == 1])
         stalled = solved_values_before == solved_values_after
         if len([box for box in values.keys() if len(values[box]) == 0]):
@@ -130,7 +141,7 @@ def reduce_puzzle(values):
 
 def search(values):
     """
-     uses dfs to find a solution for a sudoku puzzle
+     Uses DFS to find a solution for a sudoku puzzle
      Input: A sudoku in dictionary form.
      Output: The resulting sudoku in dictionary form.
     """
@@ -138,11 +149,13 @@ def search(values):
     if values == False:
         return False
     m = ""
+    #Find the least constrainted box
     for x in values:
         if len(values[x]) > 1 and (  m == "" or len(values[x]) < len(values[m]) ):
             m = x
     if m == "":
         return values
+    #Try all it's possible values
     for pos in values[m]:
         nvalues = {x : values[x] for x in values}
         nvalues[m] = pos
@@ -160,7 +173,7 @@ def solve(grid):
     Returns:
         The dictionary representation of the final sudoku grid. False if no solution exists.
     """
-    #this simply uses search() to find the ans
+    #This simply uses search() to find the answer
     values = grid_values(grid)
     return search(values)
     
